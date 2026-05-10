@@ -1,0 +1,23 @@
+name: APK Snke
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build with Buildozer
+        uses: ArtemSBulgakov/buildozer-action@v1
+        with:
+          command: buildozer android debug
+          buildozer_version: master
+
+      - name: Subir APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Snke_Lucas_V1
+          path: bin/*.apk
